@@ -8255,6 +8255,14 @@ def get_resolution_choices(current_resolution_choice, model_resolutions= None):
         resolution_choices = custom_resolutions
     if resolution_choices == None:
         resolution_choices=[
+            # 2160p (4K)
+            ("3840x2160 (16:9)", "3840x2160"),
+            ("2160x3840 (9:16)", "2160x3840"),
+            ("3840x1632 (21:9)", "3840x1632"),
+            ("1632x3840 (9:21)", "1632x3840"),
+            ("2880x2160 (4:3)", "2880x2160"),
+            ("2160x2880 (3:4)", "2160x2880"),
+            ("2160x2160 (1:1)", "2160x2160"),
             # 1080p
             ("1920x1088 (16:9)", "1920x1088"),
             ("1088x1920 (9:16)", "1088x1920"),
@@ -8296,12 +8304,13 @@ def get_resolution_choices(current_resolution_choice, model_resolutions= None):
     return resolution_choices, current_resolution_choice
 
 group_thresholds = {
-    "360p": 320 * 640,    
-    "480p": 832 * 624,     
-    "540p": 960 * 544,   
-    "720p": 1024 * 1024,  
-    "1080p": 1920 * 1088,         
-    "1440p": 9999 * 9999
+    "360p": 320 * 640,
+    "480p": 832 * 624,
+    "540p": 960 * 544,
+    "720p": 1024 * 1024,
+    "1080p": 1920 * 1088,
+    "2160p": 3840 * 2160,
+    "4320p": 9999 * 9999
 }
     
 def categorize_resolution(resolution_str):
@@ -8311,7 +8320,7 @@ def categorize_resolution(resolution_str):
     for group in group_thresholds.keys():
         if pixel_count <= group_thresholds[group]:
             return group
-    return "1440p"
+    return "4320p"
 
 def group_resolutions(model_def, resolutions, selected_resolution):
 
